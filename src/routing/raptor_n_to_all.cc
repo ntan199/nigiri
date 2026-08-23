@@ -60,7 +60,9 @@ raptor_state run_raptor_n_to_all(timetable const& tt,
                      false,
                      false,
                      false,
-                     transfer_time_settings{}};
+                     false,
+                     transfer_time_settings{},
+                     profile_idx_t{0U}};
 
   algo.next_start_time();
   for (auto const& origin : origins) {
@@ -72,8 +74,7 @@ raptor_state run_raptor_n_to_all(timetable const& tt,
 
   auto dummy = pareto_set<journey>{};
 
-  algo.execute(start_time, max_transfers, worst_time,
-               profile_idx_t{0U}, dummy);
+  algo.execute(start_time, max_transfers, worst_time, dummy);
 
   return state;
 }
